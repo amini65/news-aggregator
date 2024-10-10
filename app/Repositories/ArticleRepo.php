@@ -22,4 +22,9 @@ class ArticleRepo
     {
         $this->model = $article;
     }
+
+    public function create($params)
+    {
+        $this->model::create($params);
+    }
 }
