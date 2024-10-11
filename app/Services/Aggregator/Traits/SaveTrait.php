@@ -2,8 +2,7 @@
 
 namespace App\Services\Aggregator\Traits;
 
-use App\Models\Article;
-use App\Repositories\ArticleRepo;
+use App\Repositories\Article\ArticleRepo;
 use App\Repositories\AuthorRepo;
 use App\Repositories\CategoryRepo;
 

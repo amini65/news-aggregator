@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('articles', function (Blueprint $table) {
+            Schema::disableForeignKeyConstraints();
             $table->id();
             $table->unsignedBigInteger('source_id');
             $table->unsignedBigInteger('category_id');
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->text('content')->nullable();
             $table->dateTime('published_at')->nullable();
             $table->timestamps();
+            Schema::enableForeignKeyConstraints();
         });
     }
 

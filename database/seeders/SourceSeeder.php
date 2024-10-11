@@ -15,13 +15,13 @@ class SourceSeeder extends Seeder
     {
         $sources=[
             [
-                'name'=>'BBC News',
+                'name'=>'guardian',
                 'access_key'=>'',
                 'secret_key'=>'',
                 'url'=>''
             ],
             [
-                'name'=>'New York Times',
+                'name'=>'newsAPI',
                 'access_key'=>'',
                 'secret_key'=>'',
                 'url'=>''
@@ -35,7 +35,7 @@ class SourceSeeder extends Seeder
         ];
         foreach ($sources as $source) {
             Source::create([
-                'name'=>$source['OpenNews'],
+                'name'=>$source['name'],
                 'access_key'=>$source['access_key'],
                 'secret_key'=>$source['secret_key'],
                 'url'=>$source['url']

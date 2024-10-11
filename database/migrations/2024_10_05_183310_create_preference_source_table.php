@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('preference_source', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('source_id');
-            $table->unsignedInteger('preference_id');
+            $table->unsignedBigInteger('source_id');
+            $table->unsignedBigInteger('preference_id');
             $table->foreign('source_id')->references('id')->on('sources')->onDelete('cascade');
             $table->foreign('preference_id')->references('id')->on('preferences')->onDelete('cascade');
             $table->timestamps();

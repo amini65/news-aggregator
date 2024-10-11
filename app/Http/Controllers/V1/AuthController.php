@@ -10,6 +10,8 @@ use App\Http\Resources\UserResource;
 use App\Repositories\PasswordResetRepo;
 use App\Repositories\UserRepo;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Nette\Schema\ValidationException;
 
 class AuthController extends Controller
@@ -23,16 +25,14 @@ class AuthController extends Controller
 
     public function login(UserLoginRequest $request){
 
-        // Validate User Request
-        $request->validated();
 
         //If User email doesn't exist in system on credentials doesn't match ( can be seperated checks)
         $user=$this->repo->getUserByEmail( $request->email);
 
         if(!$user || !Hash::check($request->password,$user->password)){
-            return response()->error([
-                'message' => 'Invalid Credentials'
-            ],401);
+            return Response::error([
+                'message' => __('username_or_password_is_incorrect')
+            ],404);
         }
 
         // Get Token for Authenticated User
@@ -44,13 +44,13 @@ class AuthController extends Controller
             'access_token' => $token,
         ];
 
-        return response()->success($loginResponse,201);
+        return Response::success($loginResponse,201);
     }
 
     public function logout(){
         auth()->user()->tokens()->delete();
 
-        return response()->success([],'logged out',200);
+        return Response::success([],'logged out',200);
     }
 
     /**
@@ -68,7 +68,7 @@ class AuthController extends Controller
 
         //if no such user exists then throw an error
         if(!$user || !$user->email){
-            return response()->error(['No user with this email address','Incorrect Email Address Provided'],404);
+            return Response::error(['No user with this email address','Incorrect Email Address Provided'],404);
         }
 
         //Generate a 4 digit random Token
@@ -85,7 +85,7 @@ class AuthController extends Controller
             $resetRepo->update($user->email,$resetPasswordToken);
         }
 
-        return response()->success([],'A Code has been Sent to your Email Address.',200);
+        return Response::success([],'A Code has been Sent to your Email Address.',200);
 
     }
 
@@ -107,13 +107,13 @@ class AuthController extends Controller
 
         //Throw Exception if user is not found
         if(!$user){
-            return response()->error('No Record Found','Incorrect Email Address Provided',404);
+            return Response::error('No Record Found','Incorrect Email Address Provided',404);
         }
 
         $resetRequest=$resetRepo->getUserByEmail($user->email);
 
         if(!$resetRequest || $resetRequest->token != $attributes['token']){
-            return response()->error('An Error Occured . Please try again','Token mismatch',404);
+            return Response::error('An Error Occured . Please try again','Token mismatch',404);
         }
 
         // Update User's Password
@@ -133,7 +133,7 @@ class AuthController extends Controller
             'access_token' => $token,
         ];
 
-        return response()->success($loginResponse,201);
+        return Response::success($loginResponse,201);
 
     }
 }
