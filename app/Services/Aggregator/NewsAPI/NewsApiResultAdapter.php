@@ -12,7 +12,9 @@ class NewsApiResultAdapter implements AdapterInterface
     {
         $response=json_decode($result,true);
 
+
         foreach($response['articles'] as $key=>$item){
+
             $news[$key]['source']='newsApi';
             $news[$key]['category']='sports';
             $news[$key]['author']=$item['author'];
@@ -20,7 +22,7 @@ class NewsApiResultAdapter implements AdapterInterface
             $news[$key]['description']=$item['description'];
             $news[$key]['image']=$item['urlToImage'];
             $news[$key]['content']=$item['content'];
-            $news[$key]['published_at']=$item['publishedAt'];
+            $news[$key]['published_at']=$item['publishedAt'] ?? null;
         }
 
         return $news;

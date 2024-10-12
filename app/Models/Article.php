@@ -25,7 +25,7 @@ class Article extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function sources()
+    public function source()
     {
         return $this->belongsTo(Source::class);
     }

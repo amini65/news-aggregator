@@ -11,7 +11,7 @@ class PreferenceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,9 +22,9 @@ class PreferenceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sources'=>['array'],
-            'categories'=>['array'],
-            'authors'=>['array'],
+            'sources_id'=>'array|nullable',
+            'categories_id'=>'array|nullable',
+            'authors_id'=>'array|nullable',
         ];
     }
 }

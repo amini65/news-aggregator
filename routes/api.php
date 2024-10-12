@@ -13,7 +13,7 @@ Route::prefix('auth')->group(function () {
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
     Route::get('articles',[\App\Http\Controllers\V1\ArticleController::class,'index']);
-    Route::get('article/details',[\App\Http\Controllers\V1\ArticleController::class,'show']);
+    Route::get('article/{article}',[\App\Http\Controllers\V1\ArticleController::class,'show']);
 
     Route::get('preference/create',[\App\Http\Controllers\V1\PreferenceController::class,'create']);
     Route::get('preference/show',[\App\Http\Controllers\V1\PreferenceController::class,'show']);

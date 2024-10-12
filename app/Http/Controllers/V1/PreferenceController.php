@@ -24,13 +24,13 @@ class PreferenceController extends Controller
     {
 
         $user_id =Auth::user()->id;
-        $request->whenFilled('category',function($category) use($user_id){
+        $request->whenFilled('categories_id',function($category) use($user_id){
              $this->preferenceRepository->syncCategory($user_id,$category);
         });
-        $request->whenFilled('source',function($source) use($user_id){
+        $request->whenFilled('sources_id',function($source) use($user_id){
              $this->preferenceRepository->syncSource($user_id,$source);
         });
-        $request->whenFilled('author',function($author) use($user_id){
+        $request->whenFilled('authors_id',function($author) use($user_id){
              $this->preferenceRepository->syncAuthor($user_id,$author);
         });
 

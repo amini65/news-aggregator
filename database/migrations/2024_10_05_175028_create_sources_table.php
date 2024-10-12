@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('access_key');
             $table->string('secret_key');
             $table->string('url')->nullable();
+            $table->timestamps();
         });
     }
 

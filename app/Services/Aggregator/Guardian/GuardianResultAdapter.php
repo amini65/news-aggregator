@@ -13,13 +13,14 @@ class GuardianResultAdapter implements AdapterInterface
 
         $response=json_decode($result,true);
 
-        foreach($response['results']['results'] as $key=>$item){
+
+        foreach($response['response']['results'] as $key=>$item){
             $news[$key]['source']='guardian';
             $news[$key]['category']=$item['type'];
             $news[$key]['author']=$item['sectionName'];
             $news[$key]['title']=$item['webTitle'];
             $news[$key]['description']=$item['webUrl'];
-            $news[$key]['image']=$item['urlToImage'];
+            $news[$key]['image']=$item['urlToImage']?? '';
             $news[$key]['content']=$item['webUrl'];
             $news[$key]['published_at']=$item['webPublicationDate'];
         }

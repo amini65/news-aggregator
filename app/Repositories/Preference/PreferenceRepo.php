@@ -42,7 +42,7 @@ class PreferenceRepo implements PreferenceRepositoryInterface
     public function show($user_id): mixed
     {
         return $this->model::query()
-            ->with(['categories','source','author'])
+            ->with(['categories','sources','authors'])
             ->firstWhere('user_id', $user_id);
     }
 

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Source;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class SourceSeeder extends Seeder
 {
@@ -32,18 +33,17 @@ class SourceSeeder extends Seeder
         ];
         foreach ($sources as $source) {
 
-            $source=Source::create([
+            $sourceInstance=Source::create([
                 'name'=>$source['name'],
                 'access_key'=>$source['access_key'],
                 'secret_key'=>$source['secret_key'],
                 'url'=>$source['url']
             ]);
 
-
-
             foreach ($source['categories'] as $category) {
+
                 $category=Category::query()->firstOrCreate(['name'=>$category]);
-                $source->categories()->attach($category->id);
+                $sourceInstance->categories()->attach([$category->id]);
             }
 
 

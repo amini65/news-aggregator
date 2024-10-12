@@ -17,6 +17,12 @@ class Preference extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function sources()
+    {
+        return $this->belongsToMany(Source::class,'preference_source','preference_id','source_id');
+    }
+
+
     public function categories()
     {
         return $this->belongsToMany(Category::class,'preference_category','preference_id','category_id');

@@ -25,6 +25,6 @@ class Category extends Model
 
     public function sources()
     {
-        return $this->belongsToMany(Source::class,'category_source','category_id','source_id');
+        return $this->belongsToMany(Source::class,'source_category','category_id','source_id');
     }
 }

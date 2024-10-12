@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ArticleSearchRequest;
+use App\Http\Requests\Article\ArticleSearchRequest;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use App\Repositories\Article\ArticleRepositoryInterface;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Cache;
 
 class ArticleController extends Controller
 {
