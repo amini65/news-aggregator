@@ -14,7 +14,7 @@ class AuthorRepo
 
     public function create($name)
     {
-       return $this->model::create(['name'=>$name]);
+       return $this->model::firstOrCreate(['name'=>$name]);
     }
 
     public function findByName($name)

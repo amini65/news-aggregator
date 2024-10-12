@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('preference_author', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('author');
+            $table->unsignedBigInteger('author_id');
             $table->unsignedBigInteger('preference_id');
-            $table->foreign('author')->references('id')->on('authors');
+            $table->foreign('author_id')->references('id')->on('authors');
             $table->foreign('preference_id')->references('id')->on('preferences');
             $table->timestamps();
         });
