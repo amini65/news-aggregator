@@ -14,7 +14,7 @@ class GuardianResultAdapter implements AdapterInterface
         $response=json_decode($result,true);
 
         foreach($response['results']['results'] as $key=>$item){
-            $news[$key]['source']='Guardian';
+            $news[$key]['source']='guardian';
             $news[$key]['category']=$item['type'];
             $news[$key]['author']=$item['sectionName'];
             $news[$key]['title']=$item['webTitle'];

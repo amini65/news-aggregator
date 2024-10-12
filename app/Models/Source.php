@@ -19,4 +19,9 @@ class Source extends Model
     {
         return $this->belongsToMany(Article::class,'source_article','source_id','article_id');
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class,'source_category','source_id','category_id');
+    }
 }

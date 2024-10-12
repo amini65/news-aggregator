@@ -9,6 +9,7 @@ use App\Models\Article;
 use App\Repositories\Article\ArticleRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
 
 class ArticleController extends Controller
 {
@@ -27,10 +28,13 @@ class ArticleController extends Controller
      */
     public function index(ArticleSearchRequest $request)
     {
+
+
         $params=$request->all();
         $params['per_page'] =$request->get('per_page',15);
 
-        $params['date_time']= $request->get('date_time',now()->subDay()->format('Y-m-d H:i:s')) ;
+        $params['date_time']= $request->get('date_time',now()->subDay()->format('Y-m-d H:i:s'));
+
         $articles=$this->articleRepository->index($params);
 
         return Response::success(ArticleResource::collection($articles),__('success_response'));

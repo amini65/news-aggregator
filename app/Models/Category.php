@@ -22,4 +22,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Preference::class);
     }
+
+    public function sources()
+    {
+        return $this->belongsToMany(Source::class,'category_source','category_id','source_id');
+    }
 }

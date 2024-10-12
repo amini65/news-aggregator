@@ -13,7 +13,7 @@ class NewsApiResultAdapter implements AdapterInterface
         $response=json_decode($result,true);
 
         foreach($response['articles'] as $key=>$item){
-            $news[$key]['source']='NewsApi';
+            $news[$key]['source']='newsApi';
             $news[$key]['category']='sports';
             $news[$key]['author']=$item['author'];
             $news[$key]['title']=$item['title'];

@@ -2,26 +2,30 @@
 
 namespace App\Services\Aggregator\Traits;
 
-use App\Repositories\Article\ArticleRepo;
-use App\Repositories\AuthorRepo;
-use App\Repositories\CategoryRepo;
+use App\Repositories\Article\ArticleRepositoryInterface;
+use App\Repositories\Author\AuthorRepoInterface;
+use App\Repositories\Category\CategoryRepoInterface;
 
 trait SaveTrait
 {
     public function save()
     {
-        // TODO refactor this code
 
-        $categoryRepo= new CategoryRepo();
-        $categories=$categoryRepo->all();
+        $categoryRepo= resolve(CategoryRepoInterface::class) ;
+        $categories=$categoryRepo->getBySourceName($this->sourceName);
 
-        $autherRepo=new AuthorRepo();
-        $autheres=$autherRepo->all();
+        $authorRepo= resolve(AuthorRepoInterface::class) ;
+        $authors=$authorRepo->all();
 
-        $articleRepo=new ArticleRepo();
-        $autheres=$autherRepo->all();
+        $articleRepo= resolve(ArticleRepositoryInterface::class);
         foreach ($this->result as $result) {
 
+            if(!in_array($result['category'],$categories->toArray())){
+                $categoryRepo->create($result['category']);
+            }
+            if(!in_array($result['author'],$authors->toArray())){
+                $authorRepo->create($result['author']);
+            }
             $articleRepo->create([
                 'source'=>$this->sourceName,
                 'category'=>$result['category'],
@@ -35,8 +39,6 @@ trait SaveTrait
 
 
         }
-        dd($this->result);
-//        Article::query()
-//            ->create($this->result);
+
     }
 }

@@ -1,21 +1,20 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Author;
 
-use App\Models\Category;
+use App\Models\Author;
 
-class CategoryRepo
+class AuthorRepo
 {
-
     private $model;
-    public function __construct(Category $category)
+    public function __construct(Author $author)
     {
-        $this->model = $category;
+        $this->model = $author;
     }
 
-    public function create($params)
+    public function create($name)
     {
-        return $this->model::create($params);
+       return $this->model::create(['name'=>$name]);
     }
 
     public function findByName($name)
@@ -27,4 +26,5 @@ class CategoryRepo
     {
         return $this->model::query()->get();
     }
+
 }

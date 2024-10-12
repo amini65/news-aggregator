@@ -28,6 +28,7 @@ class GuardianSource implements SourceInterface
      */
     private $newsApiAdapter;
 
+
     public function __construct(AdapterInterface $newsApiAdapter)
     {
 
@@ -39,7 +40,6 @@ class GuardianSource implements SourceInterface
 
         $this->queryParams=[
             'q'=>'debate',
-            'tag'=>'politics/politics',
             'from-date'=>now()->subDay()->format('Y-m-d'),
             'api-key'=>$this->apiToken,
         ];
@@ -57,8 +57,6 @@ class GuardianSource implements SourceInterface
 
         return $this;
     }
-
-
 
 
 }
