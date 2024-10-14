@@ -17,9 +17,6 @@ class ArticleResponseTest extends TestCase
         ->withHeaders([
             "Accept" => "application/json",
         ]);
-
         $this->assertEquals(200, $response->getStatusCode());
-
-
     }
 }
